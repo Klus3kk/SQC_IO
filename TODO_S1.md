@@ -4,10 +4,10 @@
 "Dostarczony szkielet aplikacji SQC z działającą analizą scenariuszy tekstowych, dostępny przez REST API, z automatycznym buildem, dokumentacją techniczną i podstawową analizą jakości scenariusza."
 
 * Tutaj głównie potrzebujemy:
-- Fundamentów,
-- Architektury,
-- 2-4 sensowne PB items,
-- pełne DoD
+  - Fundamentów,
+  - Architektury,
+  - 2-4 sensowne PB items,
+  - pełne DoD
 
 ## Organizacyjne
 * Oszacowanie dostępności czasowej (liczby godzin) wszystkich członków zespołu.
@@ -59,9 +59,9 @@
 
 ### Repo
 * README:
-- Opis projektu
-- DoD
-- Cel Sprintu
+  - Opis projektu
+  - DoD
+  - Cel Sprintu
 * pom.xml w katalogu głównym
 * tag wersji (np. v0.1.0)
 
@@ -69,8 +69,8 @@
 * PB item = Issue
 * Zadania = checklist / sub-issues
 * Labels:
-- PB
-- Sprint1
-- Feature
-- Tech
+  - PB
+  - Sprint1
+  - Feature
+  - Tech
 * Milestone: Sprint 1
