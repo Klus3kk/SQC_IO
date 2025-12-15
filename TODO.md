@@ -22,7 +22,7 @@ Scenariusze:
 ### **Scrum Master (1 osoba)**
 * Pilnuje Scruma,
 * Pilnuje DoD (kryteria gotowości zadania, czyli pewnie sprawdza czy wszystko jest skończone)
-* **Też programuje (no shit XD)**
+* *Też programuje*
 
 ### **Proxy Product Owner (1 osoba)**
 * Opiekuje się Product Backlogiem
@@ -66,6 +66,7 @@ Każdy PB item ma:
   - Building Info / Struktura Scenariusza -> Composite
   - Transformacje (np. eksport) -> Decorator
   - Algorytmy analizy -> Strategy
+
 
 
 
