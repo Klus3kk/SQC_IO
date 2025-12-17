@@ -1,3 +1,8 @@
+serwer na porcie 3000
+http://localhost:3000/test
+
+
+
 # SQC_IO
 Aplikacja do weryfikowania scenariuszy.
 
