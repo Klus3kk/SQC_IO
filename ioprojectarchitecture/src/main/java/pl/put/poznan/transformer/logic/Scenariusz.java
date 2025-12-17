@@ -4,22 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Scenariusz implements AcceptVisitator {
-    List<Krok> kroki = new ArrayList<>();
+    List<AcceptVisitator> kroki = new ArrayList<>();
     String tytul;
 
     public Scenariusz(String tytul) {
         this.tytul = tytul;
     }
 
-    public void addKrok(Krok k) {
+    public void add(Krok k) {
         kroki.add(k);
     }
 
-    public void accept(Visitator visitator) {
+    public void add(Scenariusz s) {
+        kroki.add(s);
+    }
+
+    public void accept(VisitatorInterface visitator) {
         visitator.visit(this);
 
-        for (Krok k : kroki) {
-            k.accept(visitator);
+        for (AcceptVisitator e : kroki) {
+            e.accept(visitator);
         }
     }
 
