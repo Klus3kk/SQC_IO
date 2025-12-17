@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ddec5298-a09c-455a-9c39-fa30be24617d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/put/poznan/transformer/app/TextTransformerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/put/poznan/transformer/app/TextTransformerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/put/poznan/transformer/logic/Visitator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/put/poznan/transformer/logic/Visitator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
