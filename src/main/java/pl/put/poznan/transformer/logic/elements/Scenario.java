@@ -7,10 +7,32 @@ import java.util.List;
 
 public class Scenario implements Element {
     List<Element> elements = new ArrayList<>();
-    String title;
+    List<String> actors = new ArrayList<>();
+    String title = "";
+    String systemActor = "";
 
-    public Scenario(String title) {
+    public void addActor(String actor) {
+        actors.add(actor);
+    }
+
+    public List<String> getActors() {
+        return this.actors;
+    }
+
+    public void setSystemActor(String systemActor) {
+        this.systemActor = systemActor;
+    }
+
+    public String getSystemActor() {
+        return this.systemActor;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 
     public void add(Element k) {

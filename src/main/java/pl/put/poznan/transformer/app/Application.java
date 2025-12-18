@@ -11,6 +11,7 @@ import pl.put.poznan.transformer.logic.elements.Scenario;
 public class Application {
 
     public static void main(String[] args) {
+        /* EXAMPLE CODE
         CountStepsVisitor visitator = new CountStepsVisitor();
         Scenario scenariusz = new Scenario("testowy");
         Step k1 = new Step();
@@ -26,7 +27,7 @@ public class Application {
         scenariusz.accept(visitator);
 
         System.out.println(visitator.returnStepCount());
-
+        */
         SpringApplication.run(Application.class, args);
     }
 }
