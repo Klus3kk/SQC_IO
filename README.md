@@ -20,8 +20,3 @@ Aplikacja umożliwia:
 ## Diagram UML
 
 ![UML diagram](docs/uml/UML_draft.png)
-
-
-## REST API
-
-Serwer: **http://localhost:3000/test**
