@@ -1,34 +1,27 @@
-serwer na porcie 3000
-http://localhost:3000/test
+# Scenario Quality Checker (SQC)
+
+Scenario Quality Checker to aplikacja do analizy jakości scenariuszy
+wymagań funkcjonalnych zapisanych w formie tekstowej.
+System wykrywa problemy strukturalne oraz dostarcza podstawowych miar
+opisujących złożoność scenariusza.
+
+Aplikacja udostępnia funkcjonalności przez REST API.
+
+## Funkcjonalność
+
+Aplikacja umożliwia:
+- analizę liczby kroków scenariusza (łącznie z pod-scenariuszami),
+- wykrywanie kroków zawierających słowa kluczowe IF / ELSE / FOR EACH,
+- walidację obecności aktora na początku kroków,
+- eksport scenariusza do postaci tekstowej z numeracją,
+- uproszczenie scenariusza do zadanego poziomu zagnieżdżenia,
+- dostęp do analiz przez REST API.
+
+## Diagram UML
+
+![UML diagram](docs/uml/UML_draft.png)
 
 
+## REST API
 
-# SQC_IO
-Aplikacja do weryfikowania scenariuszy.
-
-## Jak ma wyglądać notacja
-* Scenariusz zawiera nagłówek określający jego tytuł i aktorów (zewnętrznych oraz system)
-* Scenariusz składa się z kroków (każdy krok zawiera tekst)
-* Kroki mogą zawierać pod-scenariusze (dowolny poziom zagłębień)
-* Kroki mogą się zaczynać od słów kluczowych: IF, ELSE, FOR EACH
-
-## Przykładowa notacja scenariuszy
-Tytuł: Dodanie książki
-
-Aktorzy:  Bibliotekarz
-
-Aktor systemowy: System
-
-* Bibliotekarz wybiera opcje dodania nowej pozycji książkowej
-* Wyświetla się formularz.
-* Bibliotekarz podaje dane książki.
-* IF: Bibliotekarz pragnie dodać egzemplarze książki
-    - Bibliotekarz wybiera opcję definiowania egzemplarzy
-    - System prezentuje zdefiniowane egzemplarze
-    - FOR EACH egzemplarz:
-        - Bibliotekarz wybiera opcję dodania egzemplarza
-        - System prosi o podanie danych egzemplarza
-        - Bibliotekarz podaje dane egzemplarza i zatwierdza.
-        - System informuje o poprawnym dodaniu egzemplarza i prezentuje zaktualizowaną listę egzemplarzy.
-- Bibliotekarz zatwierdza dodanie książki.
-- System informuje o poprawnym dodaniu książki.
+Serwer: **http://localhost:3000/test**
