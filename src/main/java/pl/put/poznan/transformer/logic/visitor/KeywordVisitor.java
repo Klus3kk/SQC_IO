@@ -4,6 +4,7 @@ import pl.put.poznan.transformer.logic.elements.Scenario;
 import pl.put.poznan.transformer.logic.elements.Step;
 
 public class KeywordVisitor implements IVisitor{
+    private static final String[] keywords = {"if", "else", "for each"};
     private Integer count = 0;
 
     @Override
@@ -14,8 +15,11 @@ public class KeywordVisitor implements IVisitor{
     @Override
     public void visit(Step step) {
         String loweredContext = step.getContent().toLowerCase();
-        if(loweredContext.contains("if") || loweredContext.contains("else") || loweredContext.contains("for each")){
-            count++;
+        for(String keyword : keywords){
+            if(loweredContext.startsWith(keyword)){
+                count++;
+                break;
+            }
         }
     }
 
