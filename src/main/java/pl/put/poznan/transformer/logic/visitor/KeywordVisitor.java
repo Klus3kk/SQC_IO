@@ -14,7 +14,7 @@ public class KeywordVisitor implements IVisitor{
 
     @Override
     public void visit(Step step) {
-        String loweredContext = step.getContent().toLowerCase();
+        String loweredContext = step.getContent().toLowerCase().strip();
         for(String keyword : keywords){
             if(loweredContext.startsWith(keyword)){
                 count++;
