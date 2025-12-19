@@ -12,9 +12,11 @@ public class CheckActorVisitor implements IVisitor {
     private String systemActor = "";
 
     public void visit(Scenario scenario) {
-        // Zbierz aktorów z głównego scenariusza
-        if (actors.isEmpty()) {
-            actors.addAll(scenario.getActors());
+        // Zbierz aktorów ze scenariusza (także z pod-scenariuszy)
+        actors.addAll(scenario.getActors());
+
+        // System actor - bierzemy pierwszego niepustego
+        if (systemActor.isEmpty() && !scenario.getSystemActor().isEmpty()) {
             systemActor = scenario.getSystemActor();
         }
     }

@@ -16,6 +16,8 @@ import java.util.Map;
 @RequestMapping("/scenario")
 public class CheckActorController {
     /* EXAMPLE REQUEST
+    POST  http://127.0.0.1:8080/scenario/checkActors
+    content-type: application/json
     {
         "type": "scenario",
         "title": "Dodanie książki",
