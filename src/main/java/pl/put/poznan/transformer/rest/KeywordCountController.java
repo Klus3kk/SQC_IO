@@ -21,7 +21,7 @@ public class KeywordCountController {
     public ResponseEntity<Map<String, Object>> handleScenario(@RequestBody JsonNode json) {
         Scenario scenario =  JsonNodeToScenarioParser.parseScenario(json);
 
-        logger.info("Received POST request to /scenario/countSteps");
+        logger.info("Received POST request to /scenario/countKeywords");
         logger.debug("Request JSON: {}", json.toString());
 
         if (scenario == null) {
