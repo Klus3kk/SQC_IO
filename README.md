@@ -20,3 +20,9 @@ Aplikacja umożliwia:
 ## Diagram UML
 
 ![UML diagram](docs/uml/UML_draft.png)
+
+## Członkowie zespołu
+* Łukasz Bielaszewski (Scrum Master)
+* Konrad Basza (Proxy Product Owner)
+* Krystian Czajkowski
+* Maksymilian Dzietczyk
