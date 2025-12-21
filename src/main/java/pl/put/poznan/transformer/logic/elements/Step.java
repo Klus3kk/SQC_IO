@@ -5,6 +5,13 @@ import pl.put.poznan.transformer.logic.visitor.IVisitor;
 public class Step implements Element {
     String content = "";
 
+    public Step(){
+    }
+
+    public Step(String str){
+        this.content = str;
+    }
+
     public void accept(IVisitor visitator) {
         visitator.visit(this);
     }
