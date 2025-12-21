@@ -17,26 +17,6 @@ public class CountStepsController {
 
     private static final Logger logger = new Logger(CountStepsController.class);
 
-    /* EXAMPLE REQUEST
-    POST  http://127.0.0.1:3000/scenario/countSteps
-    content-type: application/json
-
-    {
-        "type": "scenario",
-        "title": "Dodanie książki",
-        "system actor": "System",
-        "actors": ["Bibliotekarz"],
-        "elements": [{
-            "type": "step",
-            "content": "Bibliotekarz wybiera opcje dodania nowej pozycji książkowej"
-            },
-            {
-            "type": "step",
-            "content": "Bibliotekarz wybiera opcje dodania nowej pozycji książkowej"
-            }
-        ]
-    }
-     */
     @PostMapping("/countSteps")
     public ResponseEntity<Map<String, Object>> handleScenario(@RequestBody JsonNode json) {
         logger.info("Received POST request to /scenario/countSteps");
