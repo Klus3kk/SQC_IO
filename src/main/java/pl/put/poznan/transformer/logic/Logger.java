@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  *     logger.error("Failed to parse JSON", exception);
  * </pre>
  *
- * @author Łukasz Bielaszewski
+ * @author Lukasz Bielaszewski
  * @version 0.1.0
  */
 
