@@ -39,6 +39,8 @@ public class Scenario implements Element {
         elements.add(k);
     }
 
+    public List<Element> getElements() { return this.elements; }
+
     public void accept(IVisitor visitator) {
         visitator.visit(this);
 
