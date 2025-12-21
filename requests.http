@@ -43,29 +43,3 @@ Content-Type: application/json
     {"type": "step", "content": "Clicks another button"}
   ]
 }
-
-### Test Round-Trip Conversion (JSON -> Scenario -> JSON)
-POST http://localhost:3000/scenario/roundTrip
-Content-Type: application/json
-
-{
-  "type": "scenario",
-  "title": "Round Trip Test",
-  "system actor": "System",
-  "actors": ["User", "Admin"],
-  "elements": [
-    {"type": "step", "content": "User clicks button"},
-    {"type": "step", "content": "System validates input"},
-    {
-      "type": "scenario",
-      "title": "Nested Scenario",
-      "system actor": "System",
-      "actors": ["Admin"],
-      "elements": [
-        {"type": "step", "content": "Admin reviews"},
-        {"type": "step", "content": "Admin approves"}
-      ]
-    },
-    {"type": "step", "content": "User receives confirmation"}
-  ]
-}
