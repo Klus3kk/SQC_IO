@@ -9,15 +9,14 @@ import java.util.List;
 public class CheckActorVisitor implements IVisitor {
     private List<String> invalidSteps = new ArrayList<>();
     private List<String> actors = new ArrayList<>();
-    private String systemActor = "";
 
     public void visit(Scenario scenario) {
         // Zbierz aktorów ze scenariusza (także z pod-scenariuszy)
         actors.addAll(scenario.getActors());
 
-        // System actor - bierzemy pierwszego niepustego
-        if (systemActor.isEmpty() && !scenario.getSystemActor().isEmpty()) {
-            systemActor = scenario.getSystemActor();
+        // System actor - bierzemy niepustego
+        if (!scenario.getSystemActor().isEmpty()) {
+            actors.add(scenario.getSystemActor());
         }
     }
 
@@ -55,14 +54,9 @@ public class CheckActorVisitor implements IVisitor {
             return false;
         }
 
-        // Sprawdź czy zaczyna się od system actora
-        if (!systemActor.isEmpty() && content.startsWith(systemActor)) {
-            return true;
-        }
-
         // Sprawdź czy zaczyna się od któregoś z aktorów
         for (String actor : actors) {
-            if (content.startsWith(actor)) {
+            if (content.toLowerCase().startsWith(actor.toLowerCase())) {
                 return true;
             }
         }
