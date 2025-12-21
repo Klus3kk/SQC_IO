@@ -4,7 +4,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.Objects;
 
+/**
+ * Klasa parsująca JsonNode na obiekt klasy {@link Scenario}.
+ * Głównie przydatna w przypadku parsowania obiektu otrzymanego od klienta
+ */
 public class JsonNodeToScenarioParser {
+    /**
+     * Metoda parsuje scenariusz. Dziala rekurencyjnie dla swoich podelementow (dzieci)
+     * @param json obiekt w postaci JsonNode reprezentujacy {@link Scenario}
+     * @return {@link Scenario} lub null w przypadku błedu parsowania
+     */
     public static Scenario parseScenario(JsonNode json) {
         try {
             String type = json.path("type").asText();
@@ -69,6 +78,11 @@ public class JsonNodeToScenarioParser {
         return null;
     }
 
+    /**
+     * Parsuje JsonNode na {@link Step}
+     * @param json Obiekt JsonNode reprezentujący {@link Step}
+     * @return obiekt klasy {@link Step} lub null w przypadku błędu parsowania
+     */
     public static Step parseStep(JsonNode json) {
         try {
             String type = json.path("type").asText();
