@@ -11,6 +11,20 @@ public class Scenario implements Element {
     String title = "";
     String systemActor = "";
 
+    public Scenario(){
+
+    }
+
+    public Scenario(String title){
+        this.title = title;
+    }
+
+    public Scenario(String title, List<String> actors, String systemActor){
+        this.title = title;
+        this.actors = actors;
+        this.systemActor = systemActor;
+    }
+
     public void addActor(String actor) {
         actors.add(actor);
     }
