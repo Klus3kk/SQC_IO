@@ -1,0 +1,45 @@
+### Test Count Steps
+POST http://localhost:3000/scenario/countSteps
+Content-Type: application/json
+
+{
+  "type": "scenario",
+  "title": "Test Scenario",
+  "system actor": "System",
+  "actors": ["User"],
+  "elements": [
+    {"type": "step", "content": "User clicks button"},
+    {"type": "step", "content": "System validates input"},
+    {"type": "step", "content": "User confirms action"}
+  ]
+}
+
+### Test Count Keywords
+POST http://localhost:3000/scenario/countKeywords
+Content-Type: application/json
+
+{
+  "type": "scenario",
+  "title": "Test Keywords",
+  "system actor": "System",
+  "actors": ["User"],
+  "elements": [
+    {"type": "step", "content": "IF User is logged in"},
+    {"type": "step", "content": "ELSE System shows error"}
+  ]
+}
+
+### Test Check Actors
+POST http://localhost:3000/scenario/checkActors
+Content-Type: application/json
+
+{
+  "type": "scenario",
+  "title": "Test Actors",
+  "system actor": "System",
+  "actors": ["User"],
+  "elements": [
+    {"type": "step", "content": "User clicks button"},
+    {"type": "step", "content": "Clicks another button"}
+  ]
+}
