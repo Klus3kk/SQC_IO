@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario Quality Checker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .top {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .left {
+            flex: 1;
+        }
+
+        .right {
+            width: 200px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background: #f0f0f0;
+        }
+
+        .button-with-input {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .button-with-input button {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .button-with-input input[type="number"] {
+            width: 60px;
+            padding: 12px 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .output-section {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .copy-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top">
+        <div class="left">
+            <h3>JSON Input</h3>
+            <textarea id="jsonInput" placeholder="Enter JSON here..."></textarea>
+        </div>
+
+        <div class="right">
+            <h3>API Endpoints</h3>
+            <button data-endpoint="http://localhost:3000/scenario/checkActors" data-method="POST">Check Actors</button>
+            <button data-endpoint="http://localhost:3000/scenario/countSteps" data-method="POST">Count Steps</button>
+            <button data-endpoint="http://localhost:3000/scenario/countKeywords" data-method="POST">Keyword Count</button>
+            <button data-endpoint="http://localhost:3000/scenario/toText" data-method="POST">Scenario Formatter</button>
+
+            <div class="button-with-input">
+                <button id="simplifierBtn" data-endpoint="http://localhost:3000/scenario/simplifyScenario/{depth}" data-method="POST">Scenario Simplifier</button>
+                <input type="number" id="numberInput" value="1" min="1" max="100">
+            </div>
+        </div>
+    </div>
+
+    <div class="output-section">
+        <div class="output-header">
+            <h3>Response</h3>
+            <button class="copy-btn" id="copyBtn">Copy</button>
+        </div>
+        <textarea id="output" readonly></textarea>
+    </div>
+</div>
+
+<script>
+    const jsonInput = document.getElementById('jsonInput');
+    const output = document.getElementById('output');
+    const copyBtn = document.getElementById('copyBtn');
+    const buttons = document.querySelectorAll('.right button:not(#simplifierBtn)');
+    const simplifierBtn = document.getElementById('simplifierBtn');
+    const numberInput = document.getElementById('numberInput');
+
+    // API calls for regular buttons
+    buttons.forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const endpoint = this.dataset.endpoint;
+            const method = this.dataset.method;
+
+            try {
+                let options = {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+
+                if (['POST', 'PUT', 'PATCH'].includes(method)) {
+                    if (!jsonInput.value.trim()) {
+                        output.value = 'Error: JSON input required';
+                        return;
+                    }
+                    options.body = jsonInput.value;
+                }
+
+                const response = await fetch(endpoint, options);
+                const data = await response.json();
+                output.value = JSON.stringify(data, null, 2);
+
+            } catch (error) {
+                output.value = 'Error: ' + error.message;
+            }
+        });
+    });
+
+    // Special handler for Scenario Simplifier with number input
+    simplifierBtn.addEventListener('click', async function() {
+        const endpointTemplate = this.dataset.endpoint;
+        const method = this.dataset.method;
+        const depth = numberInput.value;
+
+        try {
+            if (!jsonInput.value.trim()) {
+                output.value = 'Error: JSON input required';
+                return;
+            }
+
+            // Replace {depth} in the endpoint URL with the actual number
+            const endpoint = endpointTemplate.replace('{depth}', depth);
+
+            let options = {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: jsonInput.value
+            };
+
+            const response = await fetch(endpoint, options);
+            const data = await response.json();
+            output.value = JSON.stringify(data, null, 2);
+
+        } catch (error) {
+            output.value = 'Error: ' + error.message;
+        }
+    });
+
+    // Copy
+    copyBtn.addEventListener('click', () => {
+        output.select();
+        document.execCommand('copy');
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = 'Copy', 1500);
+    });
+
+    // Default JSON
+    jsonInput.value = `{
+      "type": "scenario",
+      "title": "Test Scenariusz",
+      "system actor": "System",
+      "actors": [
+        "User"
+      ],
+      "elements": [
+        {
+          "type": "step",
+          "content": "Krok pierwszy"
+        },
+        {
+          "type": "step",
+          "content": "Krok drugi"
+        },
+        {
+          "type": "scenario",
+          "title": "Podscenariusz",
+          "system actor": "System",
+          "actors": [
+            "Admin"
+          ],
+          "elements": [
+            {
+              "type": "step",
+              "content": "Podkrok 1"
+            },
+            {
+              "type": "step",
+              "content": "Podkrok 2"
+            }
+          ]
+        },
+        {
+          "type": "step",
+          "content": "Krok trzeci"
+        }
+      ]
+    }`;
+</script>
+</body>
+</html>
