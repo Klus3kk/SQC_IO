@@ -6,16 +6,22 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.Logger;
 import pl.put.poznan.transformer.logic.elements.JsonNodeToScenarioParser;
 import pl.put.poznan.transformer.logic.elements.Scenario;
+import pl.put.poznan.transformer.logic.visitor.CheckActorVisitor;
 import pl.put.poznan.transformer.logic.visitor.CountStepsVisitor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/scenario")
 public class CountStepsController {
-
     private static final Logger logger = new Logger(CountStepsController.class);
+    private final Supplier<CountStepsVisitor> visitorSupplier;
+
+    public CountStepsController(Supplier<CountStepsVisitor> countStepsVisitorSupplier) {
+        this.visitorSupplier = countStepsVisitorSupplier;
+    }
 
     @PostMapping("/countSteps")
     public ResponseEntity<Map<String, Object>> handleScenario(@RequestBody JsonNode json) {
@@ -32,7 +38,7 @@ public class CountStepsController {
 
         logger.info("Successfully parsed scenario: {}", scenario.getTitle());
 
-        CountStepsVisitor visitator = new CountStepsVisitor();
+        CountStepsVisitor visitator = visitorSupplier.get();
         scenario.accept(visitator);
 
         int stepCount = visitator.returnStepCount();

@@ -6,16 +6,22 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.elements.JsonNodeToScenarioParser;
 import pl.put.poznan.transformer.logic.elements.Scenario;
 import pl.put.poznan.transformer.logic.Logger;
+import pl.put.poznan.transformer.logic.visitor.CountStepsVisitor;
 import pl.put.poznan.transformer.logic.visitor.KeywordVisitor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/scenario")
 public class KeywordCountController {
-
     private static final Logger logger = new Logger(KeywordCountController.class);
+    private final Supplier<KeywordVisitor> visitorSupplier;
+
+    public KeywordCountController(Supplier<KeywordVisitor> keywordVisitorSupplier) {
+        this.visitorSupplier = keywordVisitorSupplier;
+    }
 
     @PostMapping("/countKeywords")
     public ResponseEntity<Map<String, Object>> handleScenario(@RequestBody JsonNode json) {
@@ -32,7 +38,7 @@ public class KeywordCountController {
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
 
-        KeywordVisitor visitor = new KeywordVisitor();
+        KeywordVisitor visitor = visitorSupplier.get();
         scenario.accept(visitor);
 
         logger.info("Keywords in {} scenario were successfully counted.", scenario.getTitle());

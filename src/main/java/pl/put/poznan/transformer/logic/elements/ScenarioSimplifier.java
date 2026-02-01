@@ -17,7 +17,7 @@ public class ScenarioSimplifier {
      * @param depth liczba okresla poziom uproszczenia. Przy poziomie rownym 1 zwracany jest tylko scenariusz najwyższego poziomu. Przy poziomach wiekszym od 1 zwracane są scenariusze do danego poziomu włącznie (np. poziom rowny 2 oznacza scenariusz na najwyższym poziomie oraz jego bezpośrednie pod-scenariusze)
      * @return obiektu uproszczony {@link Scenario}
      */
-    public static Scenario getSimplifiedScenario(Scenario scenario, Integer depth){
+    public Scenario getSimplifiedScenario(Scenario scenario, Integer depth){
         if(depth < 1){
             return null;
         }
