@@ -8,9 +8,11 @@ import pl.put.poznan.transformer.logic.Logger;
 import pl.put.poznan.transformer.logic.elements.JsonNodeToScenarioParser;
 import pl.put.poznan.transformer.logic.elements.Scenario;
 import pl.put.poznan.transformer.logic.elements.ScenarioFormatter;
+import pl.put.poznan.transformer.logic.visitor.KeywordVisitor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Kontroler REST do eksportu scenariusza w postaci tekstowej z numeracją kroków.
@@ -18,8 +20,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/scenario")
 public class ScenarioFormatterController {
-
     private static final Logger logger = new Logger(ScenarioFormatterController.class);
+    private final Supplier<ScenarioFormatter> formatterSupplier;
+
+    public ScenarioFormatterController(Supplier<ScenarioFormatter> scenarioFormatterSupplier) {
+        this.formatterSupplier = scenarioFormatterSupplier;
+    }
 
     /**
      * Endpoint do pobierania scenariusza w postaci tekstowej z numeracją.
@@ -41,7 +47,7 @@ public class ScenarioFormatterController {
 
         logger.info("Successfully parsed scenario: {}", scenario.getTitle());
 
-        ScenarioFormatter formatter = new ScenarioFormatter();
+        ScenarioFormatter formatter = formatterSupplier.get();
         String formattedText = formatter.format(scenario);
 
         logger.info("Successfully formatted scenario to text");

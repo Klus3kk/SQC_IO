@@ -7,16 +7,22 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.Logger;
 import pl.put.poznan.transformer.logic.elements.JsonNodeToScenarioParser;
 import pl.put.poznan.transformer.logic.elements.Scenario;
+import pl.put.poznan.transformer.logic.elements.ScenarioSimplifier;
 import pl.put.poznan.transformer.logic.elements.ScenarioToJsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/scenario")
-public class ScenarioSimplifier {
+public class ScenarioSimplifierController {
+    private static final Logger logger = new Logger(ScenarioSimplifierController.class);
+    private final Supplier<ScenarioSimplifier> simplifierSupplier;
 
-    private static final Logger logger = new Logger(ScenarioSimplifier.class);
+    public ScenarioSimplifierController(Supplier<ScenarioSimplifier> scenarioSimplifierSupplier) {
+        this.simplifierSupplier = scenarioSimplifierSupplier;
+    }
 
     @PostMapping("/simplifyScenario/{depth}")
     public ResponseEntity<Object> handleScenario(@RequestBody JsonNode json, @PathVariable Integer depth) {
@@ -38,7 +44,8 @@ public class ScenarioSimplifier {
         }
 
         logger.info("Successfully parsed scenario: {}", scenario.getTitle());
-        Scenario scenarioSimplified = pl.put.poznan.transformer.logic.elements.ScenarioSimplifier.getSimplifiedScenario(scenario, depth);
+        ScenarioSimplifier ssimplif = simplifierSupplier.get();
+        Scenario scenarioSimplified = ssimplif.getSimplifiedScenario(scenario, depth);
 
         JsonNode outputScenario = ScenarioToJsonSerializer.serializeScenario(scenarioSimplified);
         return new ResponseEntity<>(outputScenario, HttpStatus.OK);

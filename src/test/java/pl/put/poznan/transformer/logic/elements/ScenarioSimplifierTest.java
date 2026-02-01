@@ -28,12 +28,12 @@ class ScenarioSimplifierTest {
     @Test
     public void zeroDepthNull() {
         Scenario scenario = new Scenario();
-        assertEquals(null, ScenarioSimplifier.getSimplifiedScenario(scenario, 0));
+        assertEquals(null, (new ScenarioSimplifier()).getSimplifiedScenario(scenario, 0));
     }
 
     @Test
     public void oneDepthTest() {
-        Scenario simplified = ScenarioSimplifier.getSimplifiedScenario(templateScenario, 1);
+        Scenario simplified = (new ScenarioSimplifier()).getSimplifiedScenario(templateScenario, 1);
 
         assertEquals("Title1", simplified.getTitle());
         assertEquals(3, simplified.getElements().size());
@@ -48,7 +48,7 @@ class ScenarioSimplifierTest {
 
     @Test
     public void twoDepthTest() {
-        Scenario simplified = ScenarioSimplifier.getSimplifiedScenario(templateScenario, 2);
+        Scenario simplified = (new ScenarioSimplifier()).getSimplifiedScenario(templateScenario, 2);
 
         assertEquals("Title1", simplified.getTitle());
         assertEquals(4, simplified.getElements().size());
@@ -66,7 +66,7 @@ class ScenarioSimplifierTest {
 
     @Test
     public void threeDepthTest() {
-        Scenario simplified = ScenarioSimplifier.getSimplifiedScenario(templateScenario, 3);
+        Scenario simplified = (new ScenarioSimplifier()).getSimplifiedScenario(templateScenario, 3);
 
         assertEquals("Title1", simplified.getTitle());
         assertEquals(4, simplified.getElements().size());

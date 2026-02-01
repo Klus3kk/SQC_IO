@@ -13,11 +13,18 @@ import pl.put.poznan.transformer.logic.visitor.CheckActorVisitor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/scenario")
 public class CheckActorController {
     private static final Logger logger = new Logger(CheckActorController.class);
+    private final Supplier<CheckActorVisitor> visitorSupplier;
+
+    public CheckActorController(Supplier<CheckActorVisitor> checkActorVisitorSupplier) {
+        this.visitorSupplier = checkActorVisitorSupplier;
+    }
+
     /* EXAMPLE REQUEST
     POST  http://127.0.0.1:8080/scenario/checkActors
     content-type: application/json
@@ -56,7 +63,7 @@ public class CheckActorController {
 
         logger.info("Successfully parsed scenario: {}", scenario.getTitle());
 
-        CheckActorVisitor visitor = new CheckActorVisitor();
+        CheckActorVisitor visitor = visitorSupplier.get();
         scenario.accept(visitor);
 
         List<String> invalidSteps = visitor.getInvalidSteps();

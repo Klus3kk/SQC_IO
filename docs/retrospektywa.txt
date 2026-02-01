@@ -1,0 +1,5 @@
+- w ostatnim sprincie do realizacji przypisano zbyt dużą liczbę zadań, co doprowadziło do nadmiernego obciążenia zespołu. Przyczyną było przeszacowanie możliwości zespołu oraz objętości i złożoności zadań planowanych do wykonania.
+- w kolejnym sprincie zakres prac zostanie ograniczony poprzez przypisanie mniejszej liczby zadań lub wybór zadań o niższym poziomie złożoności w porównaniu do poprzedniego sprintu
+- ostatnia pracochłonność sprintu wyszła 18 punktów
+- w tym sprincie pracochłonność będzie niższa
+- będzie to kontrolowane poprzez zapisanie do każdego github issue szacowaną pracochłonność, przez to każdy może sprawdzać czy ogólna wartość nie przewyższa ani dorównuje 18 punktów
