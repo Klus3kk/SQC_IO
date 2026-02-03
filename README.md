@@ -26,3 +26,4 @@ Aplikacja umożliwia:
 * Konrad Basza (Proxy Product Owner)
 * Krystian Czajkowski
 * Maksymilian Dzietczyk
+
